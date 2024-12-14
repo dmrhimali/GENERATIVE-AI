@@ -2,6 +2,11 @@ Ref:
 
 [Fine-tuning Falcon-7b-instruct using PEFT- LoRA on Free GPU](https://medium.com/@srishtinagu19/fine-tuning-falcon-7b-instruct-using-peft-lora-on-free-gpu-6fa1b0fcbcb)
 
+[How to make own Conversational AI System by Fine-tuning Llama2 LLM model?](https://mikalshrestha.medium.com/how-to-make-own-conversational-ai-system-by-fine-tuning-llama2-llm-model-e01faa03e81c)
+
+[Fine-Tuning Llama-2 LLM on Google Colab: A Step-by-Step Guide.](https://medium.com/@csakash03/fine-tuning-llama-2-llm-on-google-colab-a-step-by-step-guide-cf7bb367e790)
+
+
 We will fine-tune the falcon-7b-instruct model on a mental health conversational dataset to check if we get better responses than from the original model. This will be done in free GPU available on Google Colab. Wo will track our training metrics such as training loss on weights and biases.
 
 ### To push fine tuned model to huggingface:

@@ -1,4 +1,9 @@
-[TL;DR: Natural Language Benchmarks](https://www.linkedin.com/pulse/tldr-natural-language-benchmarks-overlogix-cddrf/)
+- [TL;DR: Natural Language Benchmarks](https://www.linkedin.com/pulse/tldr-natural-language-benchmarks-overlogix-cddrf/)
+- [Evaluation](https://docs.mistral.ai/guides/evaluation/)
+- [Let's talk about LLM evaluation](https://huggingface.co/blog/clefourrier/llm-evaluation)
+- [LLM Evaluation Metrics: The Ultimate LLM Evaluation Guide](https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation)
+- [LLM Evaluation: Metrics, Methodologies, Best Practices](https://www.datacamp.com/blog/llm-evaluation?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720830&utm_adgroupid=152984015254&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=724847714875&utm_targetid=aud-1645446892440:dsa-2222697810678&utm_loc_interest_ms=&utm_loc_physical_ms=9019605&utm_content=DSA~blog~Artificial-Intelligence&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-us_4-prc_5-na_6-na_7-le_8-pdsh-go_9-nb-e_10-na_11-na-dec24&gad_source=1&gclid=CjwKCAiAmfq6BhAsEiwAX1jsZ4nBoi3CR4GL_qfTM4xvSfy2sRwvJ-SrEuNNiWZdw9lgiyJi-Q_oiRoC9tAQAvD_BwE)
+-[How to Build an LLM Evaluation Framework, from Scratch](https://www.confident-ai.com/blog/how-to-build-an-llm-evaluation-framework-from-scratch)
 
 Qustion to chatgpt: `What are the most commonly used and reliable AI benchmarks for chatbot ?`
 
@@ -187,10 +192,12 @@ According to https://paperswithcode.com/dataset/medqa-usmle:
 }
 ```
 
+[See MentalLLama for testing and training mental data chatbot](https://github.com/SteveKGYang/MentalLLaMA/tree/main)
+
 ### Hellaswag:
 https://huggingface.co/datasets/Rowan/hellaswag. 
 
-HellaSwag: `Can a Machine Really Finish Your Sentence?` is a new dataset for commonsense NLI. The HellaSwag test is a benchmark dataset specifically designed to evaluate a large language model's (LLM) ability to understand and complete narratives `involving common-sense reasoning` about physical situations. Overall, the HellaSwag test serves as a valuable tool for assessing how well AI models understand and reason about the physical world, pushing them towards more robust common sense capabilities.
+HellaSwag: `Can a Machine Really Finish Your Sentence?` is a new dataset for `commonsense NLI`. The HellaSwag test is a benchmark dataset specifically designed to evaluate a large language model's (LLM) ability to understand and complete narratives `involving common-sense reasoning` about physical situations. Overall, the HellaSwag test serves as a valuable tool for assessing how well AI models understand and reason about the physical world, pushing them towards more robust common sense capabilities.
 
 Example (cropped as too long):
 ```json
@@ -216,11 +223,14 @@ The WinoGrande AI test is a benchmark designed to evaluate natural language unde
 
 
 sample from https://huggingface.co/datasets/coref-data/winogrande_raw:
+
 ```json
-'sentence': 'John moved the couch from the garage to the backyard to create space. The _ is small.',
-'option1': 'garage',
-'option2': 'backyard',
-'answer': '1'
+{
+  'sentence': 'John moved the couch from the garage to the backyard to create space. The _ is small.',
+  'option1': 'garage',
+  'option2': 'backyard',
+  'answer': '1' //answer=option1
+}
 ```
 
 ### HumanEval
@@ -230,7 +240,7 @@ sample from https://huggingface.co/datasets/coref-data/winogrande_raw:
 [dataset](https://huggingface.co/datasets/openai/openai_humaneval)
 
 
-HumanEval is a benchmark dataset developed by OpenAI that e`valuates the performance of large language models (LLMs) in code generation tasks`. It consists of 164 original programming problems, assessing language comprehension, algorithms, and simple mathematics, with some comparable to simple software interview questions. It allows assessing the capabilities of AI models in understanding and generating code.
+HumanEval is a benchmark dataset developed by OpenAI that `evaluates the performance of large language models (LLMs) in code generation tasks`. It consists of 164 original programming problems, assessing language comprehension, algorithms, and simple mathematics, with some comparable to simple software interview questions. It allows assessing the capabilities of AI models in understanding and generating code.
 
 sample dataset instance:
 ```json
@@ -243,57 +253,59 @@ sample dataset instance:
 }
 ```
 
-## My colab notebook run results
- [my notebook](https://colab.research.google.com/drive/1gTsoE-5bYa883bub_Ti4bYzhlCY0xzOQ#scrollTo=mJaP8J1YHhEa)
+### PIQA
+https://huggingface.co/datasets/ybisk/piqa
 
+PIQA focuses on everyday situations with a preference for atypical solutions.
+The PIQA dataset introduces the task of` physical commonsense reasoning` and a corresponding benchmark dataset 
 
-Run evaluation example :
-
-```sh
-python -m lm_eval \ 
---model hf \ 
---model_args pretrained=unsloth/Llama-3.2-1B-Instruct, trust_remote_code=True \ #Dataset
---tasks mmlu_flan_n_shot_generative_stem \ 
---num_fewshot 5 \ 
---device cuda:0 \ 
---batch_size 4 \ 
---limit 0.02 \ 
---output_path ./eval_result/mmlu_flan_n_shot_generative_stem \ 
---log_samples
+data instance:
+```json
+{
+  "goal": "How do I ready a guinea pig cage for it's new occupants?",
+  "sol1": "Provide the guinea pig with a cage full of a few inches of bedding made of ripped paper strips, you will also need to supply it with a water bottle and a food dish.",
+  "sol2": "Provide the guinea pig with a cage full of a few inches of bedding made of ripped jeans material, you will also need to supply it with a water bottle and a food dish.",
+  "label": 0, //i.e. answer=sol1
+}
 ```
 
+### SIQA
+https://huggingface.co/datasets/allenai/social_i_qa
 
-```sh
-hf (pretrained=dmrhimali/falcon7binstruct_mentalhealthmodel_oct23,dtype=float16), gen_kwargs: (None), limit: None, num_fewshot: None, batch_size: 6
-|    Tasks     |Version|Filter|n-shot|  Metric   |   | Value |   |Stderr|
-|--------------|------:|------|-----:|-----------|---|------:|---|-----:|
-|hellaswag     |      1|none  |     0|acc        |↑  | 0.4954|±  |0.0050|
-|              |       |none  |     0|acc_norm   |↑  | 0.6497|±  |0.0048|
-|truthfulqa_gen|      3|none  |     0|bleu_acc   |↑  | 0.3917|±  |0.0171|
-|              |       |none  |     0|bleu_diff  |↑  |-1.1580|±  |0.2672|
-|              |       |none  |     0|bleu_max   |↑  | 6.4615|±  |0.3839|
-|              |       |none  |     0|rouge1_acc |↑  | 0.4321|±  |0.0173|
-|              |       |none  |     0|rouge1_diff|↑  |-1.4294|±  |0.4396|
-|              |       |none  |     0|rouge1_max |↑  |21.4868|±  |0.6478|
-|              |       |none  |     0|rouge2_acc |↑  | 0.2754|±  |0.0156|
-|              |       |none  |     0|rouge2_diff|↑  |-2.2404|±  |0.4472|
-|              |       |none  |     0|rouge2_max |↑  |10.2050|±  |0.5473|
-|              |       |none  |     0|rougeL_acc |↑  | 0.3929|±  |0.0171|
-|              |       |none  |     0|rougeL_diff|↑  |-1.6792|±  |0.4245|
-|              |       |none  |     0|rougeL_max |↑  |18.8928|±  |0.6117|
-|truthfulqa_mc1|      2|none  |     0|acc        |↑  | 0.3097|±  |0.0162|
-|truthfulqa_mc2|      2|none  |     0|acc        |↑  | 0.4803|±  |0.0166|
+Social Interaction QA, a new question-answering benchmark for` testing social commonsense intelligence`. Social IQa focuses on reasoning about people’s actions 
+and their social implications. 
 
-9290.143424272537
+```json
+{
+    "context": "Sydney walked past a homeless woman asking for change but did not have any money they could give to her. Sydney felt bad afterwards.",    
+    "question": "How would you describe Sydney?",    
+    "answerA": "sympathetic",
+    "answerB": "like a person who was unable to help",
+    "answerC": "incredulous",
+    "label": "1", //correct answer=answerA
+}
 ```
 
-### Publish your fine tuned model results to Huggingface openllm leaderboard
+### ARC Easy and ARC Hard
+https://huggingface.co/datasets/allenai/ai2_arc
 
-Leaderboard: https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/
+Uhura-ARC-Easy is a widely recognized `scientific question answering` benchmark composed of multiple-choice science questions derived from grade-school examinations that test various styles of knowledge and reasoning. 
 
-The `--output_path ...` in your `lm_eval` commmad let's you save the output as json locally in your notebook. Then you can download them and upload/publish to openllm leadrboad. 
+The dataset is partitioned into a `Challenge Set` and an` Easy Set`, where the former contains only questions answered incorrectly by both a retrieval-based algorithm and a word co-occurrence algorithm.
 
-Login to [leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#) > Submit model
+An example of 'train' looks as follows.
+```json
+{
+    "answerKey": "B",
+    "choices": {
+        "label": ["A", "B", "C", "D"],
+        "text": ["Shady areas increased.", "Food sources increased.", "Oxygen levels increased.", "Available water increased."]
+    },
+    "id": "Mercury_SC_405487",
+    "question": "One year, the oak trees in a park began producing more acorns than usual. The next year, the population of chipmunks in the park also increased. Which best explains why there were more chipmunks the next year?"
+}
+```
+
 
 ## References:
 
