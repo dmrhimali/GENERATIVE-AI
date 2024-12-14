@@ -223,9 +223,32 @@ sample from https://huggingface.co/datasets/coref-data/winogrande_raw:
 'answer': '1'
 ```
 
+### HumanEval
+- https://paperswithcode.com/dataset/humaneval
+- [HumanEval: A Benchmark for Evaluating LLM Code Generation Capabilities](https://www.datacamp.com/tutorial/humaneval-benchmark-for-evaluating-llm-code-generation-capabilities)
+
+[dataset](https://huggingface.co/datasets/openai/openai_humaneval)
 
 
-#### Usage:
+HumanEval is a benchmark dataset developed by OpenAI that e`valuates the performance of large language models (LLMs) in code generation tasks`. It consists of 164 original programming problems, assessing language comprehension, algorithms, and simple mathematics, with some comparable to simple software interview questions. It allows assessing the capabilities of AI models in understanding and generating code.
+
+sample dataset instance:
+```json
+{
+    "task_id": "test/0",
+    "prompt": "def return1():\n",
+    "canonical_solution": "    return 1",
+    "test": "def check(candidate):\n    assert candidate() == 1",
+    "entry_point": "return1"
+}
+```
+
+## My colab notebook run results
+ [my notebook](https://colab.research.google.com/drive/1gTsoE-5bYa883bub_Ti4bYzhlCY0xzOQ#scrollTo=mJaP8J1YHhEa)
+
+
+Run evaluation example :
+
 ```sh
 python -m lm_eval \ 
 --model hf \ 
@@ -239,8 +262,6 @@ python -m lm_eval \
 --log_samples
 ```
 
-## My colab notebook run results
- [my notebook](https://colab.research.google.com/drive/1gTsoE-5bYa883bub_Ti4bYzhlCY0xzOQ#scrollTo=mJaP8J1YHhEa)
 
 ```sh
 hf (pretrained=dmrhimali/falcon7binstruct_mentalhealthmodel_oct23,dtype=float16), gen_kwargs: (None), limit: None, num_fewshot: None, batch_size: 6
@@ -270,9 +291,11 @@ hf (pretrained=dmrhimali/falcon7binstruct_mentalhealthmodel_oct23,dtype=float16)
 
 Leaderboard: https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#/
 
-The `--output_path ...` in your `lm_eval` commmad let's you save the output as json locally in your notebook. Then you can download them and upload/publish to openllm leadrboad.
+The `--output_path ...` in your `lm_eval` commmad let's you save the output as json locally in your notebook. Then you can download them and upload/publish to openllm leadrboad. 
 
-## Refeences:
+Login to [leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard#) > Submit model
+
+## References:
 
 
 [TL;DR: The WinoGrande AI Benchmark](https://www.linkedin.com/pulse/tldr-winogrande-ai-benchmark-overlogix-qfx9f/)
