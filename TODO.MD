@@ -9,6 +9,7 @@
 - [Large Language Models (LLMs)- ShawhinTalebi](https://www.youtube.com/watch?v=tFHeUSJAYbE&list=PLz-ep5RbHosU2hnz5ejezwaYpdMutMVB0&pp=iAQB)
 - [Langchain and Large language models - superlazycoder1984](https://www.youtube.com/watch?v=PGOwHIEFGiw&list=PL8Ctjqcyssq-zViibB66HdLlQfAqq__Uk&pp=iAQB)
 - [Large Language Models (LLMs) - Shaw Talebi](https://www.youtube.com/watch?v=tFHeUSJAYbE&list=PLz-ep5RbHosU2hnz5ejezwaYpdMutMVB0)
+- [Hugingface notebooks with examples](https://huggingface.co/docs/transformers/notebooks)
 
 ## langchain
 - [LangChain Master Class For Beginners 2024](https://www.youtube.com/watch?v=yF9kGESAi3M)
