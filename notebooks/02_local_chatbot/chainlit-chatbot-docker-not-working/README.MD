@@ -1,7 +1,9 @@
 Refere: [
 Build a Local Chatbot in Minutes with Chainlit](https://tinztwinshub.com/software-engineering/build-a-local-chatbot-in-minutes-with-chainlit/)
 
-# This docker setup didn't work. docker-compose up -d and opening http://localhost:8000 webui to chat hi to chatbot gav all connections refused error.
+# This docker setup didn't work.
+docker-compose up -d and opening http://localhost:8000 webui to chat hi to chatbot gav all connections refused error.
+
 You can use `sh docker-clean.sh` toclean containers and images when testing
 
 
