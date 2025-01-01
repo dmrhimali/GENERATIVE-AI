@@ -200,3 +200,20 @@ You’ve successfully learned how to:
 5. Optionally, conduct **user evaluation** for further qualitative analysis.
 
 By evaluating your fine-tuned conversational AI model using both automated metrics and human feedback, you can get a well-rounded view of its performance and identify areas for improvement.
+
+
+
+
+
+# Prepare a new dataset with a single text field with Amod/mental_health_counseling_conversations dataet original fields to match fine tuned dataset heliosbrahma/mental_health_chatbot_dataset fields
+# def process_example(example):
+#   example["text"] = "<HUMAN>: "+example["Context"] + "<ASSISTANT>: "example["Response"]
+#   return example
+
+# dataset = dataset.map(process_example)
+# new_dataset = []
+# for example in dataset:
+#     processed_example = function(example)
+#     example.update(processed_example)
+#     new_dataset.append(example)
+# return new_dataset
